@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <title>ユーザ一覧</title>
+</head>
+<body>
+    <a href="/"><p>トップ戻る</p></a>
+    <a href="/logout"><p>ログアウト</p></a>
+    <!-- 年齢フォームの追加 -->
+    <h1>追加フォーム</h1>
+    <form action="/users" method="POST">
+        <div>名前:<input name="user_name"></input></div>
+        <div>メールアドレス:<input name="mail"></input></div>
+        <div>パスワード:<input type="password" name="password"></input></div>
+        <div>
+            <input type="submit" value="送信">
+            <input type="reset" value="取消">
+        </div>
+    </form>
+
+    <!-- 年齢列の追加 -->
+    <h1>ユーザ一覧</h1>
+    <table>
+        <tr>
+            <th >名前</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.name }}</td>
+            <td><a href="/users/{{ user.id }}"><p>詳細</p></a></td>
+            <td>
+                <form action="/users/{{ user.id }}/delete" method="POST">
+                    <input type="submit" value="削除">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
